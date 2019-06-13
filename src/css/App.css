@@ -1,0 +1,234 @@
+
+body {
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
+    background-color: white ; 
+    color: white;
+}
+
+#main{
+    opacity: 1;
+}
+
+.content{
+    /* background-color: darkgray; */
+    margin-bottom: 50px;
+}
+
+
+h6,h5,h2{
+
+    color: black;
+    font-weight: 100;
+    letter-spacing: .5em;
+    line-height: .5em;
+
+}
+
+
+
+
+
+
+h1 {
+    pointer-events: all;
+    color: black;
+    margin-bottom: -25px !important;
+    font-size: 1.5em;
+    font-weight: 100;
+    letter-spacing: -.1em;
+    /*padding-left: 20vw;*/
+    text-transform: uppercase;
+    -webkit-transition:  all 1.5;
+    -moz-transition: all 1.5;
+    -ms-transition:  all 1.5;
+    -o-transition: all 1.5;
+    transition: all 1.5;
+
+}
+
+
+h3 {
+    font-weight: 100;
+    color: black;
+}
+
+.label {
+    font-weight: 100;
+    color: black;
+}
+
+
+a.git {
+    -webkit-transition:  all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition:  all .3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    color:grey;
+}
+
+a.git:hover {
+    /* font-size: 1.65em; */
+    color:black;
+    text-decoration: none;
+}
+
+
+
+.git {
+    display: inline !important;
+}
+
+i {
+  color: #000000;
+
+}
+ .fa {
+     line-height: 1.3em;
+ }
+
+
+ a.textL {
+    color:black;
+    text-decoration: none;
+    border-bottom: 1px solid black;
+  /* ^- the important bit. RGB 192,192,192 is the same as #C0C0C0*/
+
+  -webkit-transition:  all .8s ease;
+  -moz-transition:  all .8s ease;
+  -ms-transition:  all .8s ease;
+  -o-transition:  all .8s ease;
+  transition:  all .8s ease;
+}
+
+
+a.textL:hover {
+    color: lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
+.typewriter-char, .typewriter-cursor  {
+    font-weight: 100;
+    font-family: 'Futura', sans-serif;
+    color: whitesmoke;
+    font-size: 30em;
+    line-height: .9em;
+}
+
+
+
+#titleDiv{
+    color: grey;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+}
+
+.iconDiv{
+    padding-top: 35px;
+}
+
+
+span.high {
+    transition: color 1.5s;
+    -webkit-transition: color 1.5s;
+
+}
+
+span.high:hover{
+    color: whitesmoke;
+}
+
+canvas {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.bio {
+    color: black;
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.4em;
+    letter-spacing: .01em;
+    line-height: 2.1em;
+    /* padding: 50px 100px 50px 100px; */
+}
+.name {
+    position: fixed;
+    pointer-events: none;
+}
+
+.paraT{
+    padding: 50px 0px 50px 30px;   
+}
+
+p.link {
+    opacity: 1;
+}
+
+#legend {
+    opacity: 1;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+}
+
+p.emoji {
+    color: black
+}
+
+.bio2 {
+    opacity: 1;
+    -webkit-transition:  all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition:  all .3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.archive-bio {
+    cursor: pointer;
+    opacity: 1;
+    -webkit-transition:  all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition:  all .3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+/*
+ Personalized media queries for fonts size and layout of
+ right panel bio
+*/
+@media only screen and (max-width: 1000px) {
+
+    p.bio {
+        font-size: .7em;
+        padding: 50px;
+    }
+}
+
+@media only screen and (min-width: 2024px) {
+
+    p.bio {
+        font-size: 1.3em;
+    }
+}
+
+@media only screen and (max-width: 924px) {
+    p.bio {
+        font-size: 1em;
+    }
+    .typewriter-char, .typewriter-cursor  {
+        font-size: 10em;
+        line-height: .9em;
+    }
+
+    .paraT{
+        padding: 10px 5px 10px 5px;   
+    }
+    
+    
+}
