@@ -7,6 +7,7 @@ import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 const Home = React.lazy(() => import('./pages/Home'))
 const Animations = React.lazy(() => import('./pages/Animations'))
+const Basketball = React.lazy(() => import('./pages/Basketball'))
 
 // TODO: Replace with full LoadingMessagg styled app later
 const LoadingMessage = () => (
@@ -22,8 +23,13 @@ const Main = () => {
 	          <Route path="/animations">
 	            <Animations />
 	          </Route>
+
+	          <Route path="/basketball">
+	            <Basketball/>
+	          </Route>
+	  
 	          <Route>
-	            <Home />
+	            <Home path="/"/>
 	          </Route>
 	        </Switch>
 	       </Suspense>

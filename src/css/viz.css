@@ -1,0 +1,62 @@
+
+text {
+	fill: black;
+}
+
+.node {
+	stroke-width: 5px;
+	fill-opacity: .7;
+}
+
+.name-label {
+	text-anchor: middle;
+	white-space: pre-line;
+	line-height: 1em;
+}
+
+.step-title {
+	color: #444;
+	display: inline;
+	margin: 20px;
+	text-decoration: none;
+	transition: all 200ms ease-in-out;
+	cursor: pointer;
+}
+
+.step-title:hover {
+	color: lightblue;
+}
+
+.step-container {
+	background-color: white;
+	position: fixed;
+}
+
+.viz-container {
+	padding-top: 70px;
+}
+
+.pause{
+	position: fixed;
+	top: 5px;
+	right: 5px;
+	transition: all 100ms ease-in-out;
+	cursor: pointer;
+
+}
+
+.pause:hover {
+	color: lightblue;
+}
+
+.title-label {
+	fill: inherit;
+	cursor: pointer;
+	transition: fill 100ms ease-in-out;
+}
+
+.title-label:hover {
+	fill: maroon;
+}
+
+
