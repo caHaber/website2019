@@ -12,6 +12,7 @@ text {
 	text-anchor: middle;
 	white-space: pre-line;
 	line-height: 1em;
+	pointer-events: none;
 }
 
 .step-title {
@@ -60,3 +61,23 @@ text {
 }
 
 
+.Tooltip {
+	position: absolute;
+	pointer-events:none;
+	background-color: rgba(255,255,255,.7);
+
+}
+
+.tooltip-name {
+	font-weight: bold;
+}
+
+.Tooltip__contents > p{
+	margin: 0;
+	line-height: 1em;
+	padding: 0;
+}
+
+.bball-team-svg {
+	margin: 10px;
+}

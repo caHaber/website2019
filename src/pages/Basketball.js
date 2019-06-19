@@ -1,9 +1,10 @@
-import React, { Component, useEffect, useState, useRef } from 'react'
+import React, { Component, useEffect, useState, useRef,useContext,useLayoutEffect } from 'react'
 import {useSpring, animated} from 'react-spring'
 import { getAllColors, getFullName } from 'nba-color';
 
 import TrackVisibility from 'react-on-screen';
 
+import usePosition from '../utils/usePosition.js';
 
 import '../css/viz.css'
 
@@ -12,38 +13,100 @@ import {packSiblings} from 'd3-hierarchy'
 import {scaleSqrt} from 'd3-scale'
 import {format} from 'd3-format'
 
-// import * as d3 from 'd3'
+
+const Tooltip = ({ tooltip, top, left}) => {
+    return (
+        <div className={`Tooltip Tooltip--position`} style={{left:`${left + tooltip.pos[0]}px`, top: `${top + tooltip.pos[1]}px`}}>
+            {!!tooltip.contents && (
+                <div className="Tooltip__contents">
+                    <p className="tooltip-name">{tooltip.contents.name }</p>
+                    <p className="tooltip-desc">Salary: {tooltip.contents.val }</p>
+                    <p className="tooltip-desc">Signed Using: {tooltip.contents.signed }</p>
+                    <p className="tooltip-desc">Age: {tooltip.contents.age }</p>
+                </div>
+            )}
+        </div>
+    )
+}
+
+///TOOLTIP START
+const tooltipContext = React.createContext();
+const tooltip_init = (contents,pos) => { 
+		
+	let obj = {contents, pos} 
+
+	return obj
+
+	}
+
+function useTooltip(){
+  const [tooltip, setTooltip]= useState(tooltip_init(null,[0,0]));
+
+
+  const resetTooltip = () => setTooltip(tooltip_init(null, [0,0]))
+
+  return { tooltip, setTooltip, resetTooltip};
+}
+
+//TOOLTIPEND
+
 
 const colorMap = getAllColors()
 
 const moneyConverter = (d) => {
 	let val = (d === "" ? 0 : Number(d.replace(/[^0-9\.]+/g, "")))
-	// console.log(val)
-		return val
+
+	return val
 }
+
+const formatMoney = format(".4s");
+
+const PADDING = 3;
+
 
 const size = scaleSqrt()
 		.domain([0, 30000000])
 		.range([0,50]);
 
-function Circle({x,y,r, name, showname, mainColor, secColor}){
+const CircleLabel = ({name,r}) => {
+ return <text x="0" y="0" dy="0" className="name-label">{name.split(' ').map((d,i) => <tspan x={0} dy={i*15}>{d}</tspan> )}</text>
+}
+
+function Circle({x,y,r, name,age,signed, showname, mainColor, secColor,active}){
+
+
+	const {setTooltip, resetTooltip} = useContext(tooltipContext)
+
+	const or = r < 0 ? 0 : r;
 
 	const ox = x === undefined ? 0 : x;
 	const oy = y === undefined ? 0 : y;
 
 
-	const {dr, transform} = useSpring({to:{dr:r, transform:`translate(${ox},${oy})`}})
+	const {dr, transform} = useSpring({to:{dr:or, transform:`translate(${ox},${oy})`}})
 
 
-	return (<animated.g className="circle-group" transform={transform}>	
-				<animated.circle className="node" fill={mainColor} stroke={secColor} r={dr}>
+// onMouseOver={() => setTooltip({contents:name, pos:[ox + 175,oy + 175] })} 
+
+
+	return (<animated.g 
+						onMouseOver={() => {
+
+							setTooltip({contents:{name,age,signed, val: formatMoney(size.invert(r + PADDING)) }, pos:[20,300], active:name }) 
+
+						}} 
+						onMouseOut={() => resetTooltip()} 
+						className="circle-group" 
+						transform={transform}>	
+				
+				<animated.circle className="node" fill={mainColor} opacity={name === active ?  .8 : .6} stroke={secColor} r={dr}>
 				</animated.circle>
-				{showname  ? <text className="name-label"> {name}</text> : null}
+				{showname  ? <CircleLabel r={r} name={name}/> : null}
 				</animated.g>)
 
 }
 
-function TeamCircles({width, height, salaries, year, isVisible}){
+function TeamCircles({width, height, salaries, year, isVisible,active}){
 
 	const [data, setData] = useState(salaries)
 
@@ -79,7 +142,10 @@ return isVisible ? (<g transform={`translate(${width/2},${height/2})`}>
 						key={i} 
 						x={d.x} 
 						y={d.y} 
-						r={d.r} />
+						r={d.r - PADDING}
+						age={d.age}
+						signed={d.signed}
+						active={active} />
 		
 				) }
 		</g>) : null
@@ -91,11 +157,10 @@ const convertName = (n) => {
 
 
 
-	return n.substring(0,index).split(" ").join("\n")
+	return n.substring(0,index)
 
 }
 
-const formatMoney = format(".4s");
 
 const openBasketballRef = (name) => {
 
@@ -106,6 +171,9 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 
 	const [salaries, setSalaries] = useState(null)
 	const ref = useRef()
+
+
+	let {top, left} = usePosition(ref)
 
 	useEffect(()=> {
 
@@ -120,13 +188,15 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 				  return {
 
 				   	Player: convertName(d.Player),
+				   	age: d.Age,
+				   	signed: d['Signed Using'],
 				   	r: size(moneyConverter(d[year])),
 				   	showname: size(moneyConverter(d[year])) > 20 ? true : false,
 				   	'2018-19': moneyConverter(d["2018-19"]),
 				   	'2019-20': moneyConverter(d["2019-20"]),
 				   	'2020-21': moneyConverter(d["2020-21"]),
 				   	'2021-22': moneyConverter(d["2021-22"]),
-				   	 '2022-23': moneyConverter(d["2022-23"]),
+				   	'2022-23': moneyConverter(d["2022-23"]),
 				   	'2023-24': moneyConverter(d["2023-24"]),
 				  };
 			}).then(d => {
@@ -146,13 +216,19 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 
 	},[])
 
-	console.log(isVisible)
+
+	const tooltip_state = useTooltip()
 
 	return (
-		<svg width={width} height={height} ref={ref}>
-		<text className="title-label" onClick={() => openBasketballRef(team_names[team_data.Team])} dx="20" dy="20"> {team_data.Team} - {salaries && `$${formatMoney(salaries.totals[year])} mil`} </text>
-			{salaries !== null && <TeamCircles   {...{year,width,height, isVisible}} salaries={salaries}/>}
-		</svg>)
+		<tooltipContext.Provider value={tooltip_state}>
+		<svg className="bball-team-svg" width={width} height={height} ref={ref}>
+			<text className="title-label" onClick={() => openBasketballRef(team_names[team_data.Team])} dx="20" dy="20"> 
+				{team_data.Team} - {salaries && `$${formatMoney(salaries.totals[year])} mil`} 
+			</text>
+				{salaries !== null && <TeamCircles active={tooltip_state.tooltip.active}  {...{year,width,height, isVisible}} salaries={salaries}/>}
+		</svg>
+		<Tooltip tooltip={tooltip_state.tooltip} top={top} left={left}/>
+		</tooltipContext.Provider>)
 }
 
 const years = ['2018-19','2019-20','2020-21','2021-22','2022-23','2023-24']
@@ -186,7 +262,6 @@ class Basketball extends Component {
 
 
 		csv(`/data/all_salaries.csv`).then((data) => {
-
 			csv(`/data/team_abrv.csv`).then((team_names) => {
 
 
@@ -199,10 +274,10 @@ class Basketball extends Component {
 				})
 
 				this.setState({all_salaries: data, team_names: map})
-			})
-
- 			
+			})		
 		})
+
+
 
 		var t = setInterval(()=>{
 			this.setYear(-1)
@@ -226,15 +301,18 @@ class Basketball extends Component {
 
 	render(){
 		return (<div> 
+
 				<YearClicker setYear={this.setYear} year={this.state.year}/>
 				<p className="pause" onClick={this.pauseOrPlay}>{this.state.t ? 'Pause' : 'Play'}</p>
-				<div className="viz-container">
-				{this.state.all_salaries && this.state.team_names && this.state.all_salaries.map( (d,i) => 
-				<TrackVisibility offset={200} style={{width:'350px',"display":"inline"}} partialVisibility key={i} >
-					<Team team_names={this.state.team_names} year={this.state.year}  width={350} height={350} team_data={d}/>
-				</TrackVisibility>
-				)}
-				</div>
+				
+					<div className="viz-container">
+					{this.state.all_salaries && this.state.team_names && this.state.all_salaries.map( (d,i) => 
+					<TrackVisibility offset={200} style={{width:'350px',"display":"inline"}} partialVisibility key={i} >
+						<Team team_names={this.state.team_names} year={this.state.year}  width={350} height={350} team_data={d}/>
+					</TrackVisibility>
+					)}
+					</div>
+
 			</div>)
 	}
 }
