@@ -1,4 +1,5 @@
 
+
 text {
 	fill: black;
 }
@@ -31,19 +32,23 @@ text {
 .step-container {
 	background-color: white;
 	position: fixed;
+	text-align: center;
+	width: 100vw;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .viz-container {
 	padding-top: 70px;
+	text-align: center;
 }
 
 .pause{
 	position: fixed;
-	top: 5px;
-	right: 5px;
+	top: 15px;
+	right: 15px;
 	transition: all 100ms ease-in-out;
 	cursor: pointer;
-
 }
 
 .pause:hover {
@@ -65,6 +70,7 @@ text {
 	position: absolute;
 	pointer-events:none;
 	background-color: rgba(255,255,255,.7);
+	/*padding: 10px;*/
 
 }
 
@@ -74,10 +80,30 @@ text {
 
 .Tooltip__contents > p{
 	margin: 0;
-	line-height: 1em;
+	line-height: 1.1em;
+	font-size:.8em;
 	padding: 0;
+	text-align: left;
 }
 
 .bball-team-svg {
 	margin: 10px;
 }
+
+@media only screen and (max-width: 768px) {
+	.step-title {
+			font-size: .6em;
+			margin: 0px;
+			padding: 10px;
+	}
+	.viz-container {
+		padding-top: 20px;
+	}
+	.pause {
+		top:initial;
+		bottom: 0px;
+		right: 10px;
+	}
+
+}
+

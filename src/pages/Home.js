@@ -40,7 +40,7 @@ class Home extends Component {
             <p className="link"><a className="git" href="mailto:haber.casey@gmail.com">haber.casey@gmail.com</a></p>
             <br/>
            
-            <p className="link"><a className="git" href="/img/CaseyHaber_resume2019.pdf" target="_blank">Resume / CV</a></p>
+            <p className="link"><a className="git" href={process.env.PUBLIC_URL + "/img/CaseyHaber_resume2019.pdf"} target="_blank">Resume / CV</a></p>
             <br/>
             <p className="link"><a className="git" href="https://twitter.com/case_sqrd" target="_blank">twitter</a></p>
             <br/>

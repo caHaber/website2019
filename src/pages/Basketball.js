@@ -31,13 +31,13 @@ const Tooltip = ({ tooltip, top, left}) => {
 
 ///TOOLTIP START
 const tooltipContext = React.createContext();
-const tooltip_init = (contents,pos) => { 
+const tooltip_init = (contents,pos,active) => { 
 		
 	let obj = {contents, pos} 
 
 	return obj
 
-	}
+}
 
 function useTooltip(){
   const [tooltip, setTooltip]= useState(tooltip_init(null,[0,0]));
@@ -69,7 +69,16 @@ const size = scaleSqrt()
 		.range([0,50]);
 
 const CircleLabel = ({name,r}) => {
- return <text x="0" y="0" dy="0" className="name-label">{name.split(' ').map((d,i) => <tspan x={0} dy={i*15}>{d}</tspan> )}</text>
+	let size = '.9em',
+		height = 15;
+	if(r < 29){
+		size = '.7em';
+		height = 10
+	}
+
+ return (<text x="0" y="0" dy="0" fontSize={size} className="name-label">
+	 {name.split(' ').map((d,i) => <tspan key={i} x={0} dy={i*height}>{d}</tspan> )}
+	 </text>)
 }
 
 function Circle({x,y,r, name,age,signed, showname, mainColor, secColor,active}){
@@ -91,9 +100,13 @@ function Circle({x,y,r, name,age,signed, showname, mainColor, secColor,active}){
 
 	return (<animated.g 
 						onMouseOver={() => {
-
 							setTooltip({contents:{name,age,signed, val: formatMoney(size.invert(r + PADDING)) }, pos:[20,300], active:name }) 
-
+						}} 
+						onTouchStart={() => {
+							if(active === name) {
+								resetTooltip();
+							} else
+							setTooltip({contents:{name,age,signed, val: formatMoney(size.invert(r + PADDING)) }, pos:[20,300], active:name }) 
 						}} 
 						onMouseOut={() => resetTooltip()} 
 						className="circle-group" 
@@ -222,7 +235,7 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 	return (
 		<tooltipContext.Provider value={tooltip_state}>
 		<svg className="bball-team-svg" width={width} height={height} ref={ref}>
-			<text className="title-label" onClick={() => openBasketballRef(team_names[team_data.Team])} dx="20" dy="20"> 
+			<text className="title-label" onClick={() => openBasketballRef(team_names[team_data.Team])} dx="10" dy="20"> 
 				{team_data.Team} - {salaries && `$${formatMoney(salaries.totals[year])} mil`} 
 			</text>
 				{salaries !== null && <TeamCircles active={tooltip_state.tooltip.active}  {...{year,width,height, isVisible}} salaries={salaries}/>}
@@ -234,10 +247,20 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 const years = ['2018-19','2019-20','2020-21','2021-22','2022-23','2023-24']
 
 
-const YearClicker = ({year, setYear}) => {
+const formatYear = (y) => {
+	// if(window.innerWidth < 768){
+		let y1 = y.substring(2,4),
+			y2 = y.substring(y.length-2,y.length);
+
+		return `'${y1}-'${y2}`
+	// }
+	// else return y
+}
+
+const YearClicker = ({year, setYear}) => { 
 
 	return (<div className="step-container">
-		{years.map( (d,i) => <h2 key={i} className="step-title" onClick={() => setYear(i)} style={d === year ? {"textDecoration":"underline",color:'lightblue'} : null}>{d}</h2> )}
+		{years.map( (d,i) => <h2 key={i} className="step-title" onClick={() => setYear(i)} style={d === year ? {"textDecoration":"underline",color:'lightblue'} : null}>{formatYear(d)}</h2> )}
 		</div>)
 }
 
@@ -300,14 +323,14 @@ class Basketball extends Component {
 	}
 
 	render(){
-		return (<div> 
+		return (<div id="basketball-viz"> 
 
 				<YearClicker setYear={this.setYear} year={this.state.year}/>
 				<p className="pause" onClick={this.pauseOrPlay}>{this.state.t ? 'Pause' : 'Play'}</p>
 				
 					<div className="viz-container">
 					{this.state.all_salaries && this.state.team_names && this.state.all_salaries.map( (d,i) => 
-					<TrackVisibility offset={200} style={{width:'350px',"display":"inline"}} partialVisibility key={i} >
+					<TrackVisibility offset={200} style={{"width":"370px", "display":"inline"}} partialVisibility key={i} >
 						<Team team_names={this.state.team_names} year={this.state.year}  width={350} height={350} team_data={d}/>
 					</TrackVisibility>
 					)}
