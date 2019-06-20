@@ -61,26 +61,26 @@ class Home extends Component {
 
             <h3>2016 - 2017 </h3>
             <br/>
-            <p className="link"><a className="git" href="oldWebsite/SUYI" target="_blank">Exploring Academic Outcomes 📓</a></p>
+            <p className="link"><a className="git" href="archive/SUYI" target="_blank">Exploring Academic Outcomes 📓</a></p>
             <br/>
 
 
-            <p className="link"><a className="git react" href="oldWebsite/ZillowRenderDemo" target="_blank">Housing Render Demo 🎨</a></p>
+            <p className="link"><a className="git react" href="archive/ZillowRenderDemo" target="_blank">Housing Render Demo 🎨</a></p>
             <br/>
 
-            <p className="link"><a className="git react" title="Simple React transitioning, filter and search" href="oldWebsite/Reactd3" target="_blank">Simple ReactD3 Demo 🎨</a></p>
+            <p className="link"><a className="git react" title="Simple React transitioning, filter and search" href="archive/Reactd3" target="_blank">Simple ReactD3 Demo 🎨</a></p>
             <br/>
 
-            <p className="link"><a className="git" href="oldWebsite/draw" target="_blank">SVG Draw! 🎨</a></p>
+            <p className="link"><a className="git" href="archive/draw" target="_blank">SVG Draw! 🎨</a></p>
             <br/>
 
-            <p className="link"><a className="git" href="oldWebsite/ReactAnimate" target="_blank">React Animations 🎨</a></p>
+            <p className="link"><a className="git" href="archive/ReactAnimate" target="_blank">React Animations 🎨</a></p>
             <br/>
 
-            <p className="link"><a className="git react" href="oldWebsite/GitReact" target="_blank">Github Fetch 🎨</a></p>
+            <p className="link"><a className="git react" href="archive/GitReact" target="_blank">Github Fetch 🎨</a></p>
             <br/>
                        
-            <p className="link"><a className="git" href="oldWebsite/project-docs/TranquilityTracker/" target="_blank">Tranquility Tracker 📓</a></p>
+            <p className="link"><a className="git" href="archive/project-docs/TranquilityTracker/" target="_blank">Tranquility Tracker 📓</a></p>
             <br/>
 
             <p className="link"><a className="git react" target="_blank" href="https://twitter.github.io/twitteross-metrics/">Twitter OSS Metrics Prototype 📓</a></p>
