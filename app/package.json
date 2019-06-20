@@ -69,7 +69,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "find ../docs/. -maxdepth 1 ! -name oldWebsite -exec rm -rf {} \\; && node scripts/build.js && cp -r build/* ../docs/",
+    "build": "find ../docs/. -maxdepth 1 ! -name archive -exec rm -rf {} \\; && node scripts/build.js && cp -r build/* ../docs/",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
