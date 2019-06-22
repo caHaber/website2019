@@ -14,6 +14,9 @@ import {scaleSqrt} from 'd3-scale'
 import {format} from 'd3-format'
 
 
+import '../css/Basketball.scss'
+
+
 const Tooltip = ({ tooltip, top, left}) => {
     return (
         <div className={[styles.Tooltip, styles.Tooltipposition].join(' ')} style={{left:`${left + tooltip.pos[0]}px`, top: `${top + tooltip.pos[1]}px`}}>
@@ -264,10 +267,18 @@ const YearClicker = ({year, setYear}) => {
 		</div>)
 }
 
+const LandingPage = ({next}) => {
+
+
+	return <div>
+				<h2> Welcome to the NBA salaries visualization </h2>
+		 	</div>
+}
+
 class Basketball extends Component {
 
 
-	state = {year: '2018-19',index:0,t:null}
+	state = {year: '2018-19',index:0,t:null, landing: true}
 
 
 	setYear = (i) => {
@@ -324,19 +335,21 @@ class Basketball extends Component {
 
 	render(){
 		return (<div id="basketball-viz"> 
+					{this.state.landing ? 
+					<>
+						<YearClicker setYear={this.setYear} year={this.state.year}/>
+						<p className={styles.pause} onClick={this.pauseOrPlay}>{this.state.t ? 'Pause' : 'Play'}</p>
+						<div className={styles.vizcontainer}>
+						{this.state.all_salaries && this.state.team_names && this.state.all_salaries.map( (d,i) => 
+						<TrackVisibility offset={200} style={{"width":"370px", "display":"inline"}} partialVisibility key={i} >
+							<Team team_names={this.state.team_names} year={this.state.year}  width={350} height={350} team_data={d}/>
+						</TrackVisibility>
+						)}
+						</div> 
+					</>
+					: <LandingPage next={() => this.setState({landing: true})}/> }
 
-				<YearClicker setYear={this.setYear} year={this.state.year}/>
-				<p className={styles.pause} onClick={this.pauseOrPlay}>{this.state.t ? 'Pause' : 'Play'}</p>
-				
-					<div className={styles.vizcontainer}>
-					{this.state.all_salaries && this.state.team_names && this.state.all_salaries.map( (d,i) => 
-					<TrackVisibility offset={200} style={{"width":"370px", "display":"inline"}} partialVisibility key={i} >
-						<Team team_names={this.state.team_names} year={this.state.year}  width={350} height={350} team_data={d}/>
-					</TrackVisibility>
-					)}
-					</div>
-
-			</div>)
+				</div>)
 	}
 }
 

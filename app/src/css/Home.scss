@@ -10,8 +10,8 @@
     }
 
     .content{
-        /* background-color: darkgray; */
-        margin-bottom: 50px;
+        background-color: #777;
+        min-height: 100vh;
     }
 
 
@@ -24,6 +24,24 @@
 
     }
 
+    .middle-col{
+        padding:0;
+    }
+
+.contact-links {
+line-height: .8em;
+}
+
+.recent-links {
+   padding-left: 25%;
+   line-height: .8em;
+}
+
+.archive-links {
+    padding-left: 45%;
+    line-height: 1.8em;
+    // letter-spacing:
+}
 
 
 
@@ -37,7 +55,7 @@
         font-weight: 100;
         letter-spacing: -.1em;
         /*padding-left: 20vw;*/
-        text-transform: uppercase;
+        // text-transform: uppercase;
         -webkit-transition:  all 1.5;
         -moz-transition: all 1.5;
         -ms-transition:  all 1.5;
@@ -46,10 +64,17 @@
 
     }
 
+    .logo {
+        width:100%;
+        max-width:100%;
+    }
+
 
     h3 {
+        letter-spacing: -.02em;
         font-weight: 100;
-        color: black;
+        color: #444;
+        font-size: .6em;
     }
 
     .label {
@@ -149,14 +174,15 @@
     }
 
     .bio {
-        color: black;
+        color: white;
         font-weight: 100;
-        font-family: 'Raleway', sans-serif;
-        font-size: 1.4em;
-        letter-spacing: .01em;
-        line-height: 2.1em;
-        /* padding: 50px 100px 50px 100px; */
+        font-family: 'Hind';
+        font-size: 1.0em;
+        letter-spacing: .05em;
+        line-height: 1.5em;
+        padding: 100px 100px 50px 00px; 
     }
+
     .name {
         position: fixed;
         pointer-events: none;
@@ -168,6 +194,9 @@
 
     p.link {
         opacity: 1;
+        font-family: 'Hind';
+        margin-bottom: 8px;
+        font-size:.8em;
     }
 
     #legend {
@@ -181,14 +210,6 @@
         color: black
     }
 
-    .bio2 {
-        opacity: 1;
-        -webkit-transition:  all .3s ease;
-        -moz-transition: all .3s ease;
-        -ms-transition:  all .3s ease;
-        -o-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-    }
     .archive-bio {
         cursor: pointer;
         opacity: 1;
@@ -198,6 +219,15 @@
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
+
+    .title-name {
+        color: #999;
+        letter-spacing: .0em;
+        line-height: 3em;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        font-size:5em;
+    }
     /*
      Personalized media queries for fonts size and layout of
      right panel bio
@@ -206,7 +236,7 @@
 
         p.bio {
             font-size: .7em;
-            padding: 50px;
+            // padding: 50px;
         }
     }
 
@@ -238,6 +268,23 @@
         #legend {
             display: none;
         }
+
+        .bio {
+            padding-top: 10px;
+        }
+
+    .content{
+        background-color: #777;
+        min-height:inherit;
+    }
+
+
+
+    .logo {
+        width:70%;
+        max-width:70%;
+        padding-left: 0%;
+    }
 
         .iconDiv {
             padding-top: 35px;
