@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import "../css/Home.scss"
 
 import logo from '../img/logo.svg'
-import shape from '../img/Artboard.svg'
 
 class Home extends Component {
 

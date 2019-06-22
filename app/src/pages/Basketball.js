@@ -3,6 +3,8 @@ import {useSpring, animated} from 'react-spring'
 import { getAllColors, getFullName } from 'nba-color';
 
 import TrackVisibility from 'react-on-screen';
+import { Link } from 'react-router-dom'
+
 
 import usePosition from '../utils/usePosition.js';
 
@@ -13,7 +15,7 @@ import {packSiblings} from 'd3-hierarchy'
 import {scaleSqrt} from 'd3-scale'
 import {format} from 'd3-format'
 
-
+import logo from '../img/logo-dark.svg'
 import '../css/Basketball.scss'
 
 
@@ -335,6 +337,7 @@ class Basketball extends Component {
 
 	render(){
 		return (<div id="basketball-viz"> 
+					
 					{this.state.landing ? 
 					<>
 						<YearClicker setYear={this.setYear} year={this.state.year}/>
@@ -348,6 +351,8 @@ class Basketball extends Component {
 						</div> 
 					</>
 					: <LandingPage next={() => this.setState({landing: true})}/> }
+
+					<Link to="/"> <img className="website-logo" src={logo}/> </Link>
 
 				</div>)
 	}

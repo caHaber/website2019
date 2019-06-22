@@ -1,6 +1,23 @@
 #basketball-viz {
 	
 
+.website-logo {
+		position: fixed;
+		top: 5px;
+		left: 5px;
+		width: 100px;
+}
 
-	
+@media only screen and (max-width: 450px) { 
+	.website-logo {
+			position: fixed;
+			top: inherit;
+			left: 5px;
+			bottom: 5px;
+			width: 100px;
+	}
+
+
+}
+
 }
