@@ -39,7 +39,7 @@ class Home extends Component {
 
          {/* <div className="col-md-7 "></div> */}
 
-        <div className="col-md-5 link-div">
+        <div className="col-md-7 link-div">
 
 
             <div className="iconDiv contact-links col-md-12">
