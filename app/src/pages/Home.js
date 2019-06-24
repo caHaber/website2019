@@ -70,7 +70,7 @@ class Home extends Component {
                 Programming Behaviors Blog Post</a></p>
                 {/* <br/> */}
                 <p className="link"><a className="git" href="https://www.muse-portal.net/tools/reversecrowd" target="_blank">
-                MUSE ReverseCrowd</a></p>
+                MUSE Portal Prototype</a></p>
             </div>
 
 
