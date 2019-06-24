@@ -341,20 +341,19 @@ const LandingPage = ({next, pauseOrPlay,team_data,team_names}) => {
 		 				{/* <h4> Instructions: </h4> */}
 		 				<ol style={{maxWidth:"450px",margin:"auto", textAlign: 'left'}}> 
 		 					<li>
-		 						Each circle is a contracted player sized by the contracts amount of that year.
+		 						Each circle is a contracted player sized by the amount of that year.
 		 					</li>
 		 					<li>
 		 						Hover to see player info. (Tap on mobile.)
 		 					</li>
 		 					<li>
-		 						Click the team title to go the data source.
+		 						Click the team title open a new tab to the data source.
 		 					</li>
 		 					<li>
-		 						Click a year at the top of the visualizations (or press the play/pause on the main page.)
+		 						Select a NBA season at the top of the visualizations to see salaries for that year. (Or press the play/pause button on the main page to cycle through each season.)
 		 					</li>
-		 					<b><li>
-		 						
-		 						Scroll down to see all NBA teams!
+		 					<b><li>	
+		 						Hit `Enter Visualization` at the bottom of the page to see all NBA teams!
 		 					</li></b>
 		 				</ol>
 		 				<br/>
@@ -378,7 +377,9 @@ const LandingPage = ({next, pauseOrPlay,team_data,team_names}) => {
 		 			</div>
 		 	
 		 			<EnterButton next={next} pauseOrPlay={pauseOrPlay}/>
+		 			<p className="note"><em>*Salaries scraped on june 15. Data updates coming shortly.</em> </p>
 		 		</div>
+		 		<p style={{position:"fixed","bottom": "5px", "right":"15px"}}><a style={{color:"lightblue"}} href="https://github.com/caHaber/website2019/blob/master/app/src/pages/Basketball.js">Code</a></p>
 		 	</div>)
 }
 
