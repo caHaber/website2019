@@ -1,11 +1,47 @@
 #basketball-viz {
+
+	font-family: 'Hind';
 	
+
+#landing {
+	// padding-top: 70px;
+	text-align: center;
+	padding-bottom: 50px;
+}
 
 .website-logo {
 		position: fixed;
 		top: 5px;
 		left: 5px;
 		width: 100px;
+}
+
+.landing-title {
+	padding-top: 50px;
+	text-align:center;
+}
+
+.enter-button {
+	text-align: center;
+	padding-bottom: 50px;
+	margin: auto;
+	cursor: pointer;
+	transition: all 200ms ease-in-out;
+	text-decoration: underline;
+	font-size: 3em;
+	margin-top: 25px;
+}
+
+li {
+	padding-bottom: 15px;
+}
+
+.enter-button:hover {
+	fill: lightblue;
+}
+
+#bball-black {
+	fill:black;
 }
 
 @media only screen and (max-width: 450px) { 

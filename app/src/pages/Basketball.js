@@ -5,7 +5,6 @@ import { getAllColors, getFullName } from 'nba-color';
 import TrackVisibility from 'react-on-screen';
 import { Link } from 'react-router-dom'
 
-
 import usePosition from '../utils/usePosition.js';
 
 import styles from '../css/viz.module.css';
@@ -18,19 +17,54 @@ import {format} from 'd3-format'
 import logo from '../img/logo-dark.svg'
 import '../css/Basketball.scss'
 
+import {interpolateBlues} from 'd3-scale-chromatic'
 
-const Tooltip = ({ tooltip, top, left}) => {
+// import enter from '../img/enter.js'
+
+
+//OLD html tooltip
+// const Tooltip = ({ tooltip, top, left}) => {
+// 	console.log(left,top)
+//     return (
+//         <div className={[styles.Tooltip, styles.Tooltipposition].join(' ')} style={{left:`${left + tooltip.pos[0]}px`, top: `${top + tooltip.pos[1]}px`}}>
+//             {!!tooltip.contents && (
+//                 <div className={styles.Tooltipcontents}>
+//                     <p className={styles.tooltipname}>{tooltip.contents.name }</p>
+//                     <p className={styles.tooltipdesc}>Salary: {tooltip.contents.val }</p>
+//                     <p className={styles.tooltipdesc}>Signed Using: {tooltip.contents.signed }</p>
+//                     <p className={styles.tooltipdesc}>Age: {tooltip.contents.age }</p>
+//                 </div>
+//             )}
+//         </div>
+//     )
+// }
+// 
+
+
+const TooltipSVG = ({ tooltip, top, left}) => {
+	const ref= useRef();
+
+	const [dimensions, setDimensionss] = useState({});
+	useLayoutEffect(() => {
+
+		setDimensionss(ref.current.getBoundingClientRect().toJSON())
+	},[ref.current, tooltip.contents])
+
     return (
-        <div className={[styles.Tooltip, styles.Tooltipposition].join(' ')} style={{left:`${left + tooltip.pos[0]}px`, top: `${top + tooltip.pos[1]}px`}}>
+    	<>
+    	 {!!tooltip.contents && <rect className={styles.tooltiprect} y={285} width={dimensions.width} height={150} fill="white" opacity={.7}></rect>}
+        <text ref={ref} className={[styles.Tooltip, styles.Tooltipposition].join(' ')} x="0" y="300" dy="0">
+
             {!!tooltip.contents && (
-                <div className={styles.Tooltipcontents}>
-                    <p className={styles.tooltipname}>{tooltip.contents.name }</p>
-                    <p className={styles.tooltipdesc}>Salary: {tooltip.contents.val }</p>
-                    <p className={styles.tooltipdesc}>Signed Using: {tooltip.contents.signed }</p>
-                    <p className={styles.tooltipdesc}>Age: {tooltip.contents.age }</p>
-                </div>
+                <>
+                    <tspan x={20} dy={0} className={styles.tooltipname}>{tooltip.contents.name }</tspan>
+                    <tspan x={20} dy={15} className={styles.tooltipdesc}>Salary: {tooltip.contents.val }</tspan>
+                    <tspan x={20} dy={15} className={styles.tooltipdesc}>Signed Using: {tooltip.contents.signed }</tspan>
+                    <tspan x={20} dy={15} className={styles.tooltipdesc}>Age: {tooltip.contents.age }</tspan>
+           		</>
             )}
-        </div>
+        </text>
+        </>
     )
 }
 
@@ -145,6 +179,8 @@ function TeamCircles({width, height, salaries, year, isVisible,active}){
 			return obj
 		})
 
+		console.log(newdata,"ERROR")
+
 		 packSiblings(newdata.children)
 
 		 setData(newdata)
@@ -240,12 +276,13 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 	return (
 		<tooltipContext.Provider value={tooltip_state}>
 		<svg className={styles.bballteamsvg} width={width} height={height} ref={ref}>
-			<text className={styles.titlelabel} onClick={() => openBasketballRef(team_names[team_data.Team])} dx="10" dy="20"> 
-				{team_data.Team} - {salaries && `$${formatMoney(salaries.totals[year])} mil`} 
+			<text className={styles.titlelabel} onClick={() => openBasketballRef(team_names[team_data.Team])} dx="185" dy="20"> 
+				{team_data.Team} - {salaries && `$${formatMoney(salaries.totals[year])}`} 
 			</text>
 				{salaries !== null && <TeamCircles active={tooltip_state.tooltip.active}  {...{year,width,height, isVisible}} salaries={salaries}/>}
+				<TooltipSVG tooltip={tooltip_state.tooltip} top={top} left={left}/>
 		</svg>
-		<Tooltip tooltip={tooltip_state.tooltip} top={top} left={left}/>
+
 		</tooltipContext.Provider>)
 }
 
@@ -262,25 +299,93 @@ const formatYear = (y) => {
 	// else return y
 }
 
+const EnterButton = ({next, pauseOrPlay}) => {
+
+	const [color, setColor] = useState(interpolateBlues(Math.random()))
+
+
+	useEffect(()=> { 
+
+		var t = setInterval(()=>{
+			setColor(interpolateBlues(Math.random()))
+		},300)
+
+		return () => clearInterval(t)
+	},[])
+
+	return <h2 style={{color:color}} className="enter-button" onClick={() =>  {next(); pauseOrPlay();}}> Enter Visualization </h2>
+		 			
+}
+
 const YearClicker = ({year, setYear}) => { 
 
 	return (<div className={styles.stepcontainer}>
-		{years.map( (d,i) => <h2 key={i} className={styles.steptitle}onClick={() => setYear(i)} style={d === year ? {"textDecoration":"underline",color:'lightblue'} : null}>{formatYear(d)}</h2> )}
+		{years.map( (d,i) => <h2 key={i} className={styles.steptitle} onClick={() => setYear(i)} style={d === year ? {"textDecoration":"underline",color:'lightblue'} : null}>{formatYear(d)}</h2> )}
 		</div>)
 }
 
-const LandingPage = ({next}) => {
+const LandingPage = ({next, pauseOrPlay,team_data,team_names}) => {
+
+	const [year, setYear] = useState("2018-19")
 
 
-	return <div>
-				<h2> Welcome to the NBA salaries visualization </h2>
-		 	</div>
+	return  (<div className="container-fluid" id='landing'>
+      			<div className="row">
+       				 <div className="col-md-12">
+						<h2 className="landing-title"> Welcome to the NBA salaries visualization </h2>
+						{/* <br/> */}
+						<br/>
+					</div>
+					
+		 			<div className="col-md-12 col-sm-12"> 
+		 				{/* <h4> Instructions: </h4> */}
+		 				<ol style={{maxWidth:"450px",margin:"auto", textAlign: 'left'}}> 
+		 					<li>
+		 						Each circle is a contracted player sized by the contracts amount of that year.
+		 					</li>
+		 					<li>
+		 						Hover to see player info. (Tap on mobile.)
+		 					</li>
+		 					<li>
+		 						Click the team title to go the data source.
+		 					</li>
+		 					<li>
+		 						Click a year at the top of the visualizations (or press the play/pause on the main page.)
+		 					</li>
+		 					<b><li>
+		 						
+		 						Scroll down to see all NBA teams!
+		 					</li></b>
+		 				</ol>
+		 				<br/>
+		 				<hr width="50%"/>
+		 				<br/>
+		 				<h3> Example: </h3>
+		 				</div>
+		 			<div style={{padding:'0px',marginTop: '75px'}} className="col-md-12 col-sm-12">
+
+						<div style={{"width":"370px", "display":"inline"}}>
+							<div className={styles.stepcontainerlanding}>
+							{years.slice(0,2).map( (d,i) => <h2 key={i} className={styles.steptitlelanding} onClick={() => setYear(years[i])} style={d === year ? {"textDecoration":"underline",color:'lightblue'} : null}>{formatYear(d)}</h2> )}
+							</div>
+						<Team team_data={team_data} 
+						      team_names={team_names}
+							width={350} 
+							year={year}
+							height={350}
+							isVisible={true}/>
+						</div>
+		 			</div>
+		 	
+		 			<EnterButton next={next} pauseOrPlay={pauseOrPlay}/>
+		 		</div>
+		 	</div>)
 }
 
 class Basketball extends Component {
 
 
-	state = {year: '2018-19',index:0,t:null, landing: true}
+	state = {year: '2018-19',index:0, t:null, landing: false}
 
 
 	setYear = (i) => {
@@ -313,14 +418,6 @@ class Basketball extends Component {
 			})		
 		})
 
-
-
-		var t = setInterval(()=>{
-			this.setYear(-1)
-		},3000)
-
-		this.setState({t})
-
 	}
 
 	pauseOrPlay = () => {
@@ -350,7 +447,9 @@ class Basketball extends Component {
 						)}
 						</div> 
 					</>
-					: <LandingPage next={() => this.setState({landing: true})}/> }
+					: this.state.all_salaries 
+						&& this.state.team_names 
+						&& <LandingPage team_names={this.state.team_names} team_data={this.state.all_salaries[1]} pauseOrPlay={this.pauseOrPlay} next={() => this.setState({landing: true})}/> } 
 
 					<Link to="/"> <img className="website-logo" src={logo}/> </Link>
 

@@ -34,6 +34,32 @@
 	padding-bottom: 5px;
 }
 
+.stepcontainerlanding {
+	background-color: white;
+	/*position: fixed;*/
+	text-align: center;
+	margin:auto;
+	width: 370px;
+	font-size: .3em !important;
+	margin-top: -45px;
+	padding-bottom: 5px;
+}
+
+
+
+.steptitlelanding {
+	color: #444;
+	display: inline;
+	margin: 20px;
+	text-decoration: none;
+	transition: all 200ms ease-in-out;
+	cursor: pointer;
+}
+
+.steptitlelanding:hover {
+	color: lightblue;
+}
+
 .vizcontainer {
 	padding-top: 70px;
 	text-align: center;
@@ -55,6 +81,7 @@
 	fill: inherit;
 	cursor: pointer;
 	transition: fill 100ms ease-in-out;
+	text-anchor: middle;
 }
 
 .titlelabel:hover {
@@ -70,11 +97,15 @@
 
 }
 
+.tooltiprect {
+	pointer-events:none;
+}
+
 .tooltipname {
 	font-weight: bold;
 }
 
-.Tooltipcontents > p{
+.Tooltip > tspan{
 	margin: 0;
 	line-height: 1.1em;
 	font-size:.8em;
@@ -86,9 +117,9 @@
 	margin: 10px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 470px) {
 	.steptitle {
-			font-size: .6em;
+			font-size: .7em;
 			margin: 0px;
 			padding: 10px;
 	}
@@ -99,6 +130,11 @@
 		top:initial;
 		bottom: 0px;
 		right: 10px;
+	}
+
+	.bballteamsvg {
+		margin: 0px;
+		margin-top: 10px;
 	}
 
 }
