@@ -1,22 +1,22 @@
 Player,Age,2018-19,2019-20,2020-21,2021-22,2022-23,2023-24,Signed Using,Guaranteed
-Russell Westbrook\westbru01,30,$35654150,$38178000,$41006000,$43848000,$46662000,,Bird Rights,$158686150
-Paul George\georgpa01,29,$30560700,$33005556,$35450412,$37895268,,,Maximum Salary,$99016668
-Steven Adams\adamsst01,25,$24157304,$25842697,$27528090,,,,1st Round Pick,$77528091
-Dennis Schroder\schrode01,25,$15500000,$15500000,$15500000,,,,1st Round Pick,$46500000
-Andre Roberson\roberan03,27,$10000000,$10740741,,,,,Bird Rights,$20740741
-Jerami Grant\grantje01,25,$8653847,$9346153,$9346153,,,,,$18000000
-Patrick Patterson\pattepa01,30,$5451600,$5711200,,,,,MLE,$11162800
-Raymond Felton\feltora01,34,$2393887,,,,,,Minimum Salary,$2393887
-Terrance Ferguson\fergute01,21,$2118840,$2475840,$3944013,,,,1st Round Pick,$4594680
-Nerlens Noel\noelne01,25,$1757429,$1988119,,,,,Minimum Salary,$1757429
-Abdel Nader\naderab01,25,$1378242,$1618520,$1752950,,,,,$1378242
-Hamidou Diallo\diallha01,20,$838464,$1416852,$1663861,,,,MLE,$2255316
-Markieff Morris\morrima02,29,$573295,,,,,,Cap Space,$573295
-Jawun Evans\evansja01,22,,,,,,,Two-Way Contract,
-Deonte Burton\burtode02,25,,,,,,,,
-Donte Grantham\grantdo01,24,,,,,,,Two-Way Contract,
-Alex Abrines\abrinal01,25,$5455236,,,,,,,$5455236
-Kyle Singler\singlky01,31,$999200,$999200,$999200,$999200,$999200,,,$4996000
-Scotty Hopson\hopsosc01,29,$85458,,,,,,,$85458
-Richard Solomon\solomri01,26,$47371,,,,,,,$47371
+Russell Westbrook,30,$35654150,$38178000,$41006000,$43848000,$46662000,,Bird Rights,$158686150
+Paul George,29,$30560700,$33005556,$35450412,$37895268,,,Maximum Salary,$99016668
+Steven Adams,25,$24157304,$25842697,$27528090,,,,1st Round Pick,$77528091
+Dennis Schroder,25,$15500000,$15500000,$15500000,,,,1st Round Pick,$46500000
+Andre Roberson,27,$10000000,$10740741,,,,,Bird Rights,$20740741
+Jerami Grant,25,$8653847,$9346153,$9346153,,,,,$18000000
+Patrick Patterson,30,$5451600,$5711200,,,,,MLE,$11162800
+Raymond Felton,35,$2393887,,,,,,Minimum Salary,$2393887
+Terrance Ferguson,21,$2118840,$2475840,$3944013,,,,1st Round Pick,$4594680
+Nerlens Noel,25,$1757429,$1988119,,,,,Minimum Salary,$1757429
+Abdel Nader,25,$1378242,$1618520,$1752950,,,,,$1378242
+Hamidou Diallo,20,$838464,$1416852,$1663861,,,,MLE,$2255316
+Markieff Morris,29,$573295,,,,,,Cap Space,$573295
+Donte Grantham,24, ,,,,,,Two-Way Contract, 
+Jawun Evans,22, ,,,,,,Two-Way Contract, 
+Deonte Burton,25,,,,,,,,
+Alex Abrines,25,$5455236,,,,,,,$5455236
+Kyle Singler,31,$999200,$999200,$999200,$999200,$999200,,,$4996000
+Scotty Hopson,29,$85458,,,,,,,$85458
+Richard Solomon,27,$47371,,,,,,,$47371
 Team Totals,,$145625023,$146822878,$137190679,$82742468,$47661200,,,$455171364

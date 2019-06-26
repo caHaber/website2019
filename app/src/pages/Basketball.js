@@ -208,9 +208,6 @@ return isVisible ? (<g transform={`translate(${width/2},${height/2})`}>
 const convertName = (n) => {
 
 	let index = n.indexOf('\\');
-
-
-
 	return n.substring(0,index)
 
 }
@@ -241,7 +238,7 @@ function Team({team_data,team_names,width,height,year, isVisible}) {
 		csv(`/data/teams/${team_data.Team}.csv`, function(d) {
 				  return {
 
-				   	Player: convertName(d.Player),
+				   	Player: (d.Player),
 				   	age: d.Age,
 				   	signed: d['Signed Using'],
 				   	r: size(moneyConverter(d[year])),
