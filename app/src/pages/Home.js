@@ -63,14 +63,11 @@ class Home extends Component {
                 {/* <br/> */}
                  <p className="link"><Link className="git" to="/basketball">NBA Salaries</Link></p>
                 {/* <br/> */}
-                <p className="link"><a className="git" href="https://osf.io/j28ev/" target="_blank">
-                VISSOFT '19 (Preprint)</a></p>
+                <p className="link"><a className="git" href="https://twosixtech.com/choosing-open-source-libraries-and-analyzing-risks/" target="_blank">
+                VISSOFT '19 (Best short paper)</a></p>
                 {/* <br/> */}
-                <p className="link"><a className="git" href="https://www.twosixlabs.com/visualizing-programming-behaviors-with-stack-overflow/" target="_blank">
+                <p className="link"><a className="git" href="https://twosixtech.com/visualizing-programming-behaviors-with-stack-overflow/" target="_blank">
                 Programming Behaviors Blog Post</a></p>
-                {/* <br/> */}
-                <p className="link"><a className="git" href="https://www.muse-portal.net/tools/reversecrowd" target="_blank">
-                MUSE Portal Prototype</a></p>
             </div>
 
 
@@ -96,9 +93,6 @@ class Home extends Component {
             <p className="link"><a className="git react" href="archive/GitReact" target="_blank">Github Fetch</a></p>
             {/* <br/> */}
                        
-            <p className="link"><a className="git" href="archive/project-docs/TranquilityTracker/" target="_blank">Tranquility Tracker</a></p>
-            {/* <br/> */}
-
             <p className="link"><a className="git react" target="_blank" href="https://twitter.github.io/twitteross-metrics/">Twitter OSS Metrics Prototype</a></p>
             {/* <br/> */}
         </div>
