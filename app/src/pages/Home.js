@@ -92,9 +92,7 @@ class Home extends Component {
 
             <p className="link"><a className="git react" href="archive/GitReact" target="_blank">Github Fetch</a></p>
             {/* <br/> */}
-                       
-            <p className="link"><a className="git react" target="_blank" href="https://twitter.github.io/twitteross-metrics/">Twitter OSS Metrics Prototype</a></p>
-            {/* <br/> */}
+
         </div>
 
           
